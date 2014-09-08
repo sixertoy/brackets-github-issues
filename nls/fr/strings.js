@@ -27,8 +27,8 @@
 /*global define */
 
 define({
-    "MENU_LABEL"                        : "Extension",
-    "MENU_ITEM_LABEL"                   : "My Extension…",
-    "DIALOG_TITLE"                      : "Hello World",
-    "DIALOG_TEXT"                       : "Hello from my extension!"
+    "FAIL": "Fail",
+    "SUCCESS": "Success",
+    "SHOW_PANEL": "Github Issues",
+    "MENU_NAME": "Github Issues"
 });

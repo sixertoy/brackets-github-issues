@@ -1,11 +1,33 @@
 {
     "name": "brackets-github-issue",
-    "title": "Brackets Github Issue",
-    "description": "Create Github Issue>",
     "version": "0.0.1",
-    "author": "malas34 <malas34.github@gmail.com>",
-    "license": "MIT",
+    "title": "Brackets Github Issue",
+    "description": "View/Create/Manage Github Issue",
+    "homepage": "https://github.com/malas34/brackets-clocktrack",
+    "author": {
+        "name": "Matthieu Lassalvy",
+        "email": "malas34.github@gmail.com",
+        "url": "https://github.com/malas34"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/malas34/brackets-github-issue.git"
+    },
+    "license": {
+        "type": "MIT",
+        "url": "http://www.opensource.org/licenses/mit-license.php"
+    },
+    "main": [
+        "main.js"
+    ],
     "engines": {
-        "brackets": ">=0.24.0"
-    }
+        "node": ">=0.10.26",
+        "brackets": ">=0.42.0"
+    },
+    "dependencies": {
+        "q": "1.0.1",
+        "lodash": ">=2.4.1",
+        "github": ">=0.2.2"
+    },
+    "keywords": ["github", "issue", "manage", "create"]
 }
