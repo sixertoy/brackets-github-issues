@@ -22,18 +22,6 @@
  * THE SOFTWARE.
  *
  */
-/**
- *
- * NodeJS Modules
- * @see http://www.hacksparrow.com/node-js-exports-vs-module-exports.html
- * @see http://spring.io/understanding/javascript-modules
- * @see http://darrenderidder.github.io/talks/ModulePatterns/#/14
- *
- * SQLite
- * @see http://node-sqlite3.s3.amazonaws.com
- * @see http://redotheweb.com/2013/02/20/sequelize-the-javascript-orm-in-practice.html
- *
- */
 /*jslint vars: true, plusplus: true, devel: true, nomen: true, indent: 4, maxerr: 50*/
 /*global module, exports, require, process, __dirname*/
 (function () {
