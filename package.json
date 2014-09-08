@@ -1,10 +1,9 @@
 {
-    "name": "<yourname>.<extensionname>",
-    "title": "<your extension title>",
-    "description": "<fill in description>",
-    "homepage": "https://github.com/<repo>",
+    "name": "brackets-github-issue",
+    "title": "Brackets Github Issue",
+    "description": "Create Github Issue>",
     "version": "0.0.1",
-    "author": "<name etc, url, etc...>",
+    "author": "malas34 <malas34.github@gmail.com>",
     "license": "MIT",
     "engines": {
         "brackets": ">=0.24.0"
