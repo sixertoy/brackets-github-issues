@@ -51,43 +51,33 @@
             _.extend(this._options, options);
         },
 
-        _getRepositoryName: function(url){
-            var str = url.split(Path.sep);
-            return str[str.length - 1];
-        },
-
-        _getRepoIssues: function(){
+        _getRepoIssues: function(repoUrl){
             console.log(PREFIX + ' :: ' + this.options().name + ' _issue');
-
             var $this = this,
-                deferred = Q.defer();
-
-            this.getService().issues.repoIssues({
-                user: 'malas34',
-                repo: _repositoryName
-            }, function(err, res) {
+                deferred = Q.defer(),
+                rule = new RegExp('^(https|http|git)(://github.com/)(.*)/', 'i');
+            var obj = {};
+                obj.user = repoUrl.match(rule)[3];
+                obj.repo = Path.basename(repoUrl, '.git');
+            this.getService().issues.repoIssues(obj, function(err, res) {
                 if (err !== null){
-                    deferred.reject(err);
+                    var msg = JSON.parse(err.message);
+                    deferred.reject(PREFIX + ' :: ' + $this.options().name + ' ' + msg.message);
                 } else {
                     deferred.resolve(res);
                 }
             });
-
             return deferred.promise;
         },
 
-        _execute: function (repositoryUrl, errback) {
+        _execute: function (repoUrl, errback) {
             console.log(PREFIX + ' :: ' + this.options().name + ' execute command');
-            _repositoryName = this._getRepositoryName(repositoryUrl);
-            console.log(_repositoryName);
-            /*
-            this._getRepoIssues()
+            this._getRepoIssues(repoUrl)
                 .then(function (values) {
                     errback(null, values);
                 }, function (err) {
                     errback(err, null);
                 });
-                */
         }
 
     });

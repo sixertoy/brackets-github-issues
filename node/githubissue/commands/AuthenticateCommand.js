@@ -52,14 +52,12 @@
             console.log(PREFIX + ' :: ' + this.options().name + ' _authenticate');
             var $this = this,
                 deferred = Q.defer();
-
             try{
                 this.getService().authenticate(_login);
                 deferred.resolve(true);
             } catch(err){
                 deferred.reject(err);
             }
-
             return deferred.promise;
         },
 

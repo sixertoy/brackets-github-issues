@@ -81,10 +81,25 @@ Globals
 
     // @TODO clear issues panel
     function _clearPanel(){
+        $appButton.hide();
     }
 
-    function _refreshPanel(issues){
-
+    function _refreshPanel(data){
+        var $row,
+            string,
+            issues = data,
+            $target = $('#' + EXTENSION_ID + '-panel .table-container .box');
+        if (_.isArray(issues)){
+            $appButton.show();
+            for( var i = 0; i < issues.length; i++) {
+                console.log(issues[i]);
+                /*
+                string = _.extend(issues[i], {even: (i % 2) ? 'odd' : '', type: ''});
+                $row = $(Mustache.render(RowHTML, string));
+                $target.append($row);
+                */
+            }
+        }
     }
 
     /**
@@ -101,25 +116,6 @@ Globals
             })
             .fail(function(err){
                 console.log('[' + EXTENSION_ID + '] :: _getRepositoryIssues ' + Strings.FAIL);
-                console.error(err);
-            });
-    }
-
-    /**
-     *
-     */
-    function _authenticate(){
-        console.log('[' + EXTENSION_ID + '] :: _authenticate');
-        var _login = {
-            username: 'toto',
-            password: 'toto'
-        };
-        _controller.exec('authenticate', _login)
-            .done(function(bool){
-                console.log('[' + EXTENSION_ID + '] :: _authenticate ' + Strings.SUCCESS);
-            })
-            .fail(function(err){
-                console.log('[' + EXTENSION_ID + '] :: _authenticate ' + Strings.FAIL);
                 console.error(err);
             });
     }
@@ -152,7 +148,6 @@ Globals
                 }
                 if (_repositoryUrl) {
                     _getRepositoryIssues();
-                    $appButton.show();
                 } else {
                     var n = '';
                     if (data.hasOwnProperty('name')) {
@@ -171,6 +166,33 @@ Globals
     function _onBeforeAppClose(){
         $(ProjectManager).off('beforeAppClose');
         $(ProjectManager).off('projectOpen');
+    }
+
+
+    function _initListeners(){
+        $(ProjectManager).on('beforeAppClose', _onBeforeAppClose );
+        $(ProjectManager).on('projectOpen', _onProjectOpen);
+        _onProjectOpen();
+    }
+
+    /**
+     *
+     */
+    function _authenticate(){
+        console.log('[' + EXTENSION_ID + '] :: _authenticate');
+        var _login = {
+            username: 'malas34',
+            password: '#Hello$1976#'
+        };
+        _controller.exec('authenticate', _login)
+            .done(function(bool){
+                console.log('[' + EXTENSION_ID + '] :: _authenticate ' + Strings.SUCCESS);
+                _initListeners();
+            })
+            .fail(function(err){
+                console.log('[' + EXTENSION_ID + '] :: _authenticate ' + Strings.FAIL);
+                console.error(err);
+            });
     }
 
     /**
@@ -228,9 +250,8 @@ Globals
         console.log('[' + EXTENSION_ID + '] :: appReady');
         __registerCommands();
         __registerWindowsMenu();
-        $(ProjectManager).on('beforeAppClose', _onBeforeAppClose );
-        $(ProjectManager).on('projectOpen', _onProjectOpen);
-        _onProjectOpen();
+        // _authenticate();
+        _initListeners();
     });
 
 });

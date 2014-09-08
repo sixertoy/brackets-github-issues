@@ -125,10 +125,18 @@
     }
     .box{
         clear:both;
+        .line{
+            clear:both;
+            width: 100%;
+            overflow: hidden;
+            &.odd{
+                background:rgba(0, 0, 0, 0.05);
+            }
+        }
     }
 }
 /*
-#brackets-console-panel{
+#brackets-githubissue-panel{
     .box{
         clear:both;
         .line{
