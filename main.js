@@ -154,11 +154,17 @@ Globals
                     _getRepositoryIssues();
                     $appButton.show();
                 } else {
-                    console.log('[' + EXTENSION_ID + '] :: Project ' + + ' has no repository definition. See https://www.npmjs.org/doc/files/package.json.html');
+                    var n = '';
+                    if (data.hasOwnProperty('name')) {
+                        n = data.name;
+                    } else if (data.hasOwnProperty('title')) {
+                        n = data.title;
+                    }
+                    console.log('[' + EXTENSION_ID + '] :: Project ' + n + ' has no repository definition. See https://github.com/malas34/brackets-github-issue/blob/master/README.md for more details');
                 }
             })
             .fail(function(){
-                console.error('[' + EXTENSION_ID + '] :: Unable to load project\'s package.json');
+                    console.error('[' + EXTENSION_ID + '] :: Unable to load project\'s package.json');
             });
     }
 

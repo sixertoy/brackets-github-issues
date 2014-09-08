@@ -1,7 +1,7 @@
 Brackets Github Issue
 ====
 
-> Github Issue is an extension build for [Adobe Brackets](!http://brackets.io)
+> Github Issue is an extension build for [!Adobe Brackets](http://brackets.io)
 > It brings to you the abilities to view your github project's issue
 > Inside the best Open Source webdevelopement IDE
 
@@ -18,7 +18,7 @@ package.json Requirements
     }
 }
 ```
-[Full package.json documentation](!https://www.npmjs.org/doc/files/package.json.html)
+[!Full package.json documentation](https://www.npmjs.org/doc/files/package.json.html)
 
 License
 ===
