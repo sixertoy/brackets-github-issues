@@ -93,11 +93,9 @@ Globals
             $appButton.show();
             for( var i = 0; i < issues.length; i++) {
                 console.log(issues[i]);
-                /*
-                string = _.extend(issues[i], {even: (i % 2) ? 'odd' : '', type: ''});
+                string = _.extend(issues[i], {even: (i % 2) ? 'odd' : ''});
                 $row = $(Mustache.render(RowHTML, string));
                 $target.append($row);
-                */
             }
         }
     }
@@ -223,7 +221,8 @@ Globals
         var minHeight = 100;
         _.extend(Strings,{ID_PREFIX:EXTENSION_ID});
         PanelManager.createBottomPanel(EXTENSION_ID + '.panel', $(Mustache.render(PanelHTML, Strings)), minHeight);
-        $appPanel = $('#' + EXTENSION_ID + '-panel').on('click', _handlerPanelVisibility);
+        $appPanel = $('#' + EXTENSION_ID + '-panel');
+        $('#' + EXTENSION_ID + '-panel .toolbar').on('click', _handlerPanelVisibility);
         //
         $('#main-toolbar .buttons').append(Mustache.render(ButtonHTML, Strings));
         $appButton = $('#' + EXTENSION_ID + '-button').on('click', _handlerPanelVisibility).hide();

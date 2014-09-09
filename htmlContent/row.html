@@ -1,3 +1,16 @@
-<li class="line {{even}} {{type}}">
+<li class="line {{even}} {{state}}">
     <span>{{title}}</span>
+    <span>#{{number}}</span>
+    <span>Status {{state}}</span>
+    <span>{{description}}</span>
+    <span><a href="{{html_url}}" title="">link</a></span>
+    <input type="hidden" name="" value="{{id}}">
+    <span>Created at: {{created_at}}</span>
+    <span>Updated at: {{updated_at}}</span>
+    <span>Close at: {{close_at}}</span>
+    <span>Updated at: {{updated_at}}</span>
+    <span>Close by: {{closed_by}}</span>
+    <span>milestone {{milestone.title}}</span>
+    <span>milestone #{{milestone.number}}</span>
+    <span>milestone <a href="{{milestone.url}}" title="">link</a></span>
 </li>
