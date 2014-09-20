@@ -35,6 +35,7 @@ define(function (require, exports, module) {
         Menus = brackets.getModule('command/Menus'),
         AppInit = brackets.getModule('utils/AppInit'),
         Resizer = brackets.getModule('utils/Resizer'),
+        Commands = brackets.getModule('command/Commands'),
         NodeDomain = brackets.getModule('utils/NodeDomain'),
         PanelManager = brackets.getModule('view/PanelManager'),
         EditorManager = brackets.getModule('editor/EditorManager'),
@@ -51,7 +52,6 @@ Globals
     var NODE_PATH = 'node/githubissue/',
         PREFIX = 'malas34',
         EXTENSION_ID = 'brackets-githubissue',
-        WINDOWS_MENU_ID = PREFIX + '-brackets.windows.menus',
         SHOWPANEL_COMMAND_ID = PREFIX + '.' + EXTENSION_ID + '.showpanel';
     /* --------------------------
 
@@ -257,11 +257,8 @@ Globals
     }
 
     function __registerWindowsMenu() {
-        var menu = Menus.getMenu(WINDOWS_MENU_ID);
-        if (menu === null || menu === undefined) {
-            menu = Menus.addMenu(Strings.MENU_NAME, WINDOWS_MENU_ID, Menus.AFTER, Menus.AppMenuBar.NAVIGATE_MENU);
-        }
-        menu.addMenuItem(SHOWPANEL_COMMAND_ID);
+        var menu = Menus.getMenu(Menus.AppMenuBar.VIEW_MENU);
+        menu.addMenuItem(SHOWPANEL_COMMAND_ID, null, Menus.AFTER, Commands.VIEW_TOGGLE_INSPECTION);
     }
 
     AppInit.appReady(function () {
