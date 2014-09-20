@@ -58,9 +58,9 @@ Globals
  UI Ressources
 
 */
-
     var $appPanel = null,
-        $appButton = null;
+        $appButton = null,
+        $issuesList =  null;
 
     var Strings = require('strings');
 
@@ -77,25 +77,44 @@ Globals
         _extensionPrefs = PreferencesManager.getExtensionPrefs(PREFIX + '.' + EXTENSION_ID),
         _controller = new NodeDomain('githubissue', _modulePath),
         _repositoryUrl = false,
+        // _initialized = false,
         _module = module;
 
     // @TODO clear issues panel
-    function _clearPanel(){
+    function _clearPanel() {
         $appButton.hide();
+        $issuesList.html('');
     }
 
-    function _refreshPanel(data){
-        var $row,
+    /**
+     *
+     * Masque/Affiche le panneau
+     * MAJ de la class de l'icone du panneau
+     *
+     */
+    function _handlerPanelVisibility() {
+        $appButton.toggleClass('active');
+        Resizer.toggle($appPanel);
+        CommandManager.get(SHOWPANEL_COMMAND_ID).setChecked($appButton.hasClass('active'));
+        if (!$appButton.hasClass('active')) {
+            EditorManager.focusEditor();
+        }
+    }
+
+    function _refreshPanel(data) {
+        var i,
+            $row,
             string,
-            issues = data,
-            $target = $('#' + EXTENSION_ID + '-panel .table-container .box');
-        if (_.isArray(issues)){
+            issues = data;
+        // @TODO remove row events click on _clearPanel
+        $issuesList = $('#' + EXTENSION_ID + '-panel .table-container .box');
+        if (_.isArray(issues)) {
             $appButton.show();
-            for( var i = 0; i < issues.length; i++) {
+            for (i = 0; i < issues.length; i++) {
                 console.log(issues[i]);
                 string = _.extend(issues[i], {even: (i % 2) ? 'odd' : ''});
                 $row = $(Mustache.render(RowHTML, string));
-                $target.append($row);
+                $issuesList.append($row);
             }
         }
     }
@@ -104,15 +123,15 @@ Globals
      * Recupere les issues
      * depuis le repository actuel
      */
-    function _getRepositoryIssues(){
+    function _getRepositoryIssues() {
         console.log('[' + EXTENSION_ID + '] :: _getRepositoryIssues');
         var _user = 'malas34';
         _controller.exec('issue', _repositoryUrl)
-            .done(function(issues){
+            .done(function (issues) {
                 console.log('[' + EXTENSION_ID + '] :: _getRepositoryIssues ' + Strings.SUCCESS);
                 _refreshPanel(issues);
             })
-            .fail(function(err){
+            .fail(function (err) {
                 console.log('[' + EXTENSION_ID + '] :: _getRepositoryIssues ' + Strings.FAIL);
                 console.error(err);
             });
@@ -126,17 +145,22 @@ Globals
      * "repository": "http[s]://github/repo/url"
      * "repository":{ "type":"git", "url":"http[s]://github/repo/url"}
      */
-    function _onProjectOpen(){
+    function _onProjectOpen() {
         console.log('[' + EXTENSION_ID + '] :: _onProjectOpen');
-        _clearPanel();
         var uri = ProjectManager.getInitialProjectPath();
+        // Chargement du JSON du projet
         ExtensionUtils.loadPackageJson(uri)
             .done(function (data) {
+                // Si le package.json contient un champs repository
                 if (data.hasOwnProperty('repository')) {
+                    // Si le champs repository est une string
                     if (_.isString(data.repository) && !_.isEmpty(data.repository)) {
                         _repositoryUrl = data.repository;
+                    // Si le champs repository est un object
                     } else if (_.isPlainObject(data.repository)) {
                         data = data.repository;
+                        // Si le champs url existe
+                        // et que le champs type est egal a 'git'
                         if (data.hasOwnProperty('url') && data.hasOwnProperty('type') && data.type === 'git') {
                             if (_.isString(data.url) && !_.isEmpty(data.url)) {
                                 _repositoryUrl = data.url;
@@ -156,57 +180,52 @@ Globals
                     console.log('[' + EXTENSION_ID + '] :: Project ' + n + ' has no repository definition. See https://github.com/malas34/brackets-github-issue for more details');
                 }
             })
-            .fail(function(){
-                    console.error('[' + EXTENSION_ID + '] :: Unable to load project\'s package.json');
+            .fail(function () {
+                console.error('[' + EXTENSION_ID + '] :: Unable to load project\'s package.json');
             });
     }
 
-    function _onBeforeAppClose(){
-        $(ProjectManager).off('beforeAppClose');
-        $(ProjectManager).off('projectOpen');
+    function _onProjectClose() {
+        console.log('[' + EXTENSION_ID + '] :: _onProjectClose');
+        _clearPanel();
     }
 
 
-    function _initListeners(){
-        $(ProjectManager).on('beforeAppClose', _onBeforeAppClose );
+    function _removeAppListeners() {
+        /*
+        $(ProjectManager).off('beforeAppClose', _removeAppListeners);
+        $(ProjectManager).off('projectClose', _onProjectClose);
+        $(ProjectManager).off('projectOpen', _onProjectOpen);
+        */
+    }
+
+    function _addAppListeners() {
+        $(ProjectManager).on('beforeAppClose', _removeAppListeners);
+        $(ProjectManager).on('projectClose', _onProjectClose);
         $(ProjectManager).on('projectOpen', _onProjectOpen);
-        _onProjectOpen();
     }
 
     /**
      *
      */
-    function _authenticate(){
+    /*
+    function _authenticate() {
         console.log('[' + EXTENSION_ID + '] :: _authenticate');
         var _login = {
             username: 'malas34',
-            password: '#Hello$1976#'
+            password: '**********'
         };
         _controller.exec('authenticate', _login)
-            .done(function(bool){
+            .done(function (bool) {
                 console.log('[' + EXTENSION_ID + '] :: _authenticate ' + Strings.SUCCESS);
                 _initListeners();
             })
-            .fail(function(err){
+            .fail(function (err) {
                 console.log('[' + EXTENSION_ID + '] :: _authenticate ' + Strings.FAIL);
                 console.error(err);
             });
     }
-
-    /**
-     *
-     * Masque/Affiche le panneau
-     * MAJ de la class de l'icone du panneau
-     *
-     */
-    function _handlerPanelVisibility() {
-        $appButton.toggleClass('active');
-        Resizer.toggle($appPanel);
-        CommandManager.get(SHOWPANEL_COMMAND_ID).setChecked($appButton.hasClass('active'));
-        if (!$appButton.hasClass('active')) {
-            EditorManager.focusEditor();
-        }
-    }
+    */
 
     /*
      *
@@ -218,8 +237,8 @@ Globals
     AppInit.htmlReady(function () {
         console.log('[' + EXTENSION_ID + '] :: htmlReady');
         //
-        var minHeight = 100;
-        _.extend(Strings,{ID_PREFIX:EXTENSION_ID});
+        var minHeight = 360;
+        _.extend(Strings, {ID_PREFIX: EXTENSION_ID});
         PanelManager.createBottomPanel(EXTENSION_ID + '.panel', $(Mustache.render(PanelHTML, Strings)), minHeight);
         $appPanel = $('#' + EXTENSION_ID + '-panel');
         $('#' + EXTENSION_ID + '-panel .toolbar').on('click', _handlerPanelVisibility);
@@ -245,12 +264,11 @@ Globals
         menu.addMenuItem(SHOWPANEL_COMMAND_ID);
     }
 
-    AppInit.appReady(function(){
+    AppInit.appReady(function () {
         console.log('[' + EXTENSION_ID + '] :: appReady');
-        __registerCommands();
-        __registerWindowsMenu();
-        // _authenticate();
-        _initListeners();
+        // _initialized = false;
+        _addAppListeners();
+        _onProjectOpen();
     });
 
 });
