@@ -1,17 +1,73 @@
 // out: styles.css, compress: true, strictMath: true
+/*#2d2e30;*/
+@icon:'images/button.svg';
+#brackets-githubissue-panel{
+    ul, li{
+        margin:0;
+        padding:0;
+        list-style-type: none;
+    }
+    &.bottom-panel{
+        .toolbar{
+            .title {
+                cursor:pointer;
+                text-align: left;
+                line-height: 24px;
+                padding-left: 30px;
+                background: url(@icon) no-repeat left top transparent;
+            }
+        }
+        .table-container{
+            /*
+            height: 360px;
+            min-height: 360px;
+            max-height: 360px;
+            */
+            overflow-x: auto;
+            overflow-y: hidden;
+            position: relative;
+            .box{
+                top:20px;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                display: block;
+                position: absolute;
+                .line{
+                    float:left;
+                    width:200px;
+                    height:320px;
+                    padding:20px;
+                    margin-left:20px;
+                    border-radius:4px;
+                    background:rgba(0, 0, 0, 0.15);
+                }
+            }
+        }
+    }
+}
+#brackets-githubissue-button {
+    position: relative;
+    background: url(@icon) no-repeat center top transparent;
+    &.active{
+        background-position: center bottom;
+    }
+}
+/*
 @dark:#3C3F41;
 @light-dark:#444749;
-@selected:rgba(45, 46, 48, 1);/*#2d2e30;*/
+@selected:rgba(45, 46, 48, 1);
 @selected-border-top:rgba(0,0,0,0.12);
 @selected-border-bottom:rgba(255,255,255,0.12);
 @light: #fff;
 @red:#f74687;
 @blue: #8fddff;
-@icon:'images/button.svg';
 @shadow: rgba(0, 0, 0, 0.498039) 0px 1px 2px;
 @orange:#FF6500;
 @green:#ACE539;
 @grey:#999580;
+
+
 #brackets-githubissue-panel{
     &.bottom-panel{
         border:0;
@@ -25,11 +81,6 @@
             text-align: center;
             .title {
                 color:@grey;
-                cursor:pointer;
-                text-align: left;
-                line-height: 24px;
-                padding-left: 30px;
-                background: url(@icon) no-repeat left top transparent;
             }
             .close{
                 color:@blue;
@@ -112,12 +163,13 @@
 
     }
 }
+*/
 /** --------------------------------
  *
  * Specific
  *
  */
-#brackets-githubissue-panel{
+/*
     ul{
         margin: 0;
         padding: 0;

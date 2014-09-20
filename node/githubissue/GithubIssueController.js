@@ -64,7 +64,7 @@
         },
 
 
-        getService: function(){
+        getService: function () {
             return _service;
         },
 

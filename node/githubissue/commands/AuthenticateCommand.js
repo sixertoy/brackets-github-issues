@@ -34,7 +34,7 @@
 
     var PREFIX = '[githubissue]';
 
-    var _login = { type:'basic'},
+    var _login = { type: 'basic'},
         options = {
             async: true,
             name: 'authenticate',
@@ -48,14 +48,14 @@
             _.extend(this._options, options);
         },
 
-        _authenticate: function(){
+        _authenticate: function () {
             console.log(PREFIX + ' :: ' + this.options().name + ' _authenticate');
             var $this = this,
                 deferred = Q.defer();
-            try{
+            try {
                 this.getService().authenticate(_login);
                 deferred.resolve(true);
-            } catch(err){
+            } catch (err) {
                 deferred.reject(err);
             }
             return deferred.promise;

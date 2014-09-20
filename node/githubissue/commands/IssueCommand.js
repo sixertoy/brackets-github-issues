@@ -51,16 +51,16 @@
             _.extend(this._options, options);
         },
 
-        _getRepoIssues: function(repoUrl){
+        _getRepoIssues: function (repoUrl) {
             console.log(PREFIX + ' :: ' + this.options().name + ' _issue');
             var $this = this,
                 deferred = Q.defer(),
                 rule = new RegExp('^(https|http|git)(://github.com/)(.*)/', 'i');
             var obj = {};
-                obj.user = repoUrl.match(rule)[3];
-                obj.repo = Path.basename(repoUrl, '.git');
-            this.getService().issues.repoIssues(obj, function(err, res) {
-                if (err !== null){
+            obj.user = repoUrl.match(rule)[3];
+            obj.repo = Path.basename(repoUrl, '.git');
+            this.getService().issues.repoIssues(obj, function (err, res) {
+                if (err !== null) {
                     var msg = JSON.parse(err.message);
                     deferred.reject(PREFIX + ' :: ' + $this.options().name + ' ' + msg.message);
                 } else {
