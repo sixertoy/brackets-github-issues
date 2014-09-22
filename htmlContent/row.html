@@ -1,22 +1,38 @@
-<li class="line {{even}} {{state}}">
-    <div class="top">
-        <span class="title">{{title}}</span>
-        <span class="number">#{{number}}</span>
+<li class="item {{even}}">
+    <div class="head clearfix">
+        <div class="number">
+            <a href="{{html_url}}" title="">#{{number}}</a>
+        </div>
+        <div class="status">
+            {{!--<span>state</span>--}}
+            <a class="comments" href="{{comments_url}}" title="">
+                <span><i class="icon"></i>{{comments}}</span>
+            </a>
+            {{!--<button class="btn-alt-quiet"></button>--}}
+        </div>
     </div>
-    <!--
-    <div class="content">
-        <span>Status {{state}}</span>
-        <span>{{description}}</span>
-        <span><a href="{{html_url}}" title="">link</a></span>
-        <input type="hidden" name="" value="{{id}}">
-        <span>Created at: {{created_at}}</span>
-        <span>Updated at: {{updated_at}}</span>
-        <span>Close at: {{close_at}}</span>
-        <span>Updated at: {{updated_at}}</span>
-        <span>Close by: {{closed_by}}</span>
-        <span>milestone {{milestone.title}}</span>
-        <span>milestone #{{milestone.number}}</span>
-        <span>milestone <a href="{{milestone.url}}" title="">link</a></span>
+    <div class="labels">
+        {{#labels}}
+            <a href="{{url}}" style="background-color:#{{color}}">
+                <span>{{name}}</span>
+            </a>
+        {{/labels}}
     </div>
-    -->
+    <div class="title">
+        <div>
+            <a href="{{html_url}}" title="">{{title}}</a>
+        </div>
+    </div>
+    <div class="description">
+        <div>
+            <p>{{body}}</p>
+        </div>
+    </div>
+    <div class="footer clearfix">
+        <div>{{created_at}}</div>
+        <div class="milestone">
+            <a href="{{milestone.url}}" title="">{{milestone.title}}</a>
+        </div>
+    </div>
+    <input type="hidden" name="" value="{{id}}">
 </li>

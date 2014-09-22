@@ -58,7 +58,8 @@ Globals
  UI Ressources
 
 */
-    var $appPanel = null,
+    var _command = null,
+        $appPanel = null,
         $appButton = null,
         $issuesList =  null;
 
@@ -77,14 +78,7 @@ Globals
         _extensionPrefs = PreferencesManager.getExtensionPrefs(PREFIX + '.' + EXTENSION_ID),
         _controller = new NodeDomain('githubissue', _modulePath),
         _repositoryUrl = false,
-        // _initialized = false,
         _module = module;
-
-    // @TODO clear issues panel
-    function _clearPanel() {
-        $appButton.hide();
-        $issuesList.html('');
-    }
 
     /**
      *
@@ -95,7 +89,7 @@ Globals
     function _handlerPanelVisibility() {
         $appButton.toggleClass('active');
         Resizer.toggle($appPanel);
-        CommandManager.get(SHOWPANEL_COMMAND_ID).setChecked($appButton.hasClass('active'));
+        _command.setChecked($appButton.hasClass('active'));
         if (!$appButton.hasClass('active')) {
             EditorManager.focusEditor();
         }
@@ -107,34 +101,67 @@ Globals
             string,
             issues = data;
         // @TODO remove row events click on _clearPanel
-        $issuesList = $('#' + EXTENSION_ID + '-panel .table-container .box');
-        if (_.isArray(issues)) {
+        $issuesList = $('#' + EXTENSION_ID + '-panel .table-container .box .list');
+        if (_.isArray(issues) && (issues.length > 0)) {
             $appButton.show();
+            _command.setEnabled(true);
             for (i = 0; i < issues.length; i++) {
                 console.log(issues[i]);
                 string = _.extend(issues[i], {even: (i % 2) ? 'odd' : ''});
                 $row = $(Mustache.render(RowHTML, string));
                 $issuesList.append($row);
             }
+            var width = issues.length * ((240) + 20);
+            $issuesList.css('width', (width + 20) + 'px');
         }
     }
 
     /**
+     *
      * Recupere les issues
      * depuis le repository actuel
+     *
      */
     function _getRepositoryIssues() {
-        console.log('[' + EXTENSION_ID + '] :: _getRepositoryIssues');
-        var _user = 'malas34';
-        _controller.exec('issue', _repositoryUrl)
-            .done(function (issues) {
-                console.log('[' + EXTENSION_ID + '] :: _getRepositoryIssues ' + Strings.SUCCESS);
-                _refreshPanel(issues);
-            })
-            .fail(function (err) {
-                console.log('[' + EXTENSION_ID + '] :: _getRepositoryIssues ' + Strings.FAIL);
-                console.error(err);
-            });
+        // console.log('[' + EXTENSION_ID + '] :: _getRepositoryIssues');
+        if (_repositoryUrl) {
+            var _user = 'malas34';
+            _controller.exec('issue', _repositoryUrl)
+                .done(function (issues) {
+                    // console.log('[' + EXTENSION_ID + '] :: _getRepositoryIssues ' + Strings.SUCCESS);
+                    _refreshPanel(issues);
+                })
+                .fail(function (err) {
+                    // console.log('[' + EXTENSION_ID + '] :: _getRepositoryIssues ' + Strings.FAIL);
+                    console.error(err);
+                });
+        }
+    }
+
+    /**
+     *
+     * Si un package JSON est charge
+     * on parse l'url du repo git
+     * si le repo est un objet
+     * on verifie qu'il s'agit d'un repo git
+     *
+     */
+    function _getRepositoryURL(data) {
+        var result = false;
+        // Si le champs repository est une string
+        if (_.isString(data.repository) && !_.isEmpty(data.repository)) {
+            result = data.repository;
+        } else if (_.isPlainObject(data.repository)) {
+            data = data.repository;
+            // Si le champs url existe
+            // et que le champs type est egal a 'git'
+            if (data.hasOwnProperty('url') && data.hasOwnProperty('type') && data.type === 'git') {
+                if (_.isString(data.url) && !_.isEmpty(data.url)) {
+                    result = data.url;
+                }
+            }
+        }
+        return result;
     }
 
     /**
@@ -146,29 +173,13 @@ Globals
      * "repository":{ "type":"git", "url":"http[s]://github/repo/url"}
      */
     function _onProjectOpen() {
-        console.log('[' + EXTENSION_ID + '] :: _onProjectOpen');
         var uri = ProjectManager.getInitialProjectPath();
         // Chargement du JSON du projet
         ExtensionUtils.loadPackageJson(uri)
             .done(function (data) {
                 // Si le package.json contient un champs repository
                 if (data.hasOwnProperty('repository')) {
-                    // Si le champs repository est une string
-                    if (_.isString(data.repository) && !_.isEmpty(data.repository)) {
-                        _repositoryUrl = data.repository;
-                    // Si le champs repository est un object
-                    } else if (_.isPlainObject(data.repository)) {
-                        data = data.repository;
-                        // Si le champs url existe
-                        // et que le champs type est egal a 'git'
-                        if (data.hasOwnProperty('url') && data.hasOwnProperty('type') && data.type === 'git') {
-                            if (_.isString(data.url) && !_.isEmpty(data.url)) {
-                                _repositoryUrl = data.url;
-                            }
-                        }
-                    }
-                }
-                if (_repositoryUrl) {
+                    _repositoryUrl = _getRepositoryURL(data);
                     _getRepositoryIssues();
                 } else {
                     var n = '';
@@ -181,22 +192,41 @@ Globals
                 }
             })
             .fail(function () {
-                console.error('[' + EXTENSION_ID + '] :: Unable to load project\'s package.json');
+                console.log('[' + EXTENSION_ID + '] :: Unable to load project\'s package.json');
             });
     }
 
+    /**
+     *
+     * A la fermeture d'un projet
+     * on ferme le panneau
+     * on desactive le bouton
+     * on cache le bouton
+     * on supprime les issues dans la liste
+     * on reinitialize les variables
+     *
+     */
     function _onProjectClose() {
-        console.log('[' + EXTENSION_ID + '] :: _onProjectClose');
-        _clearPanel();
+        // console.log('[' + EXTENSION_ID + '] :: _onProjectClose');
+        if ($appButton.hasClass('active')) {
+            Resizer.toggle($appPanel);
+            _command.setChecked(false);
+            _command.setEnabled(false);
+            $appButton.removeClass('active');
+        }
+        if (!_.isNull($issuesList) && $issuesList.length) {
+            $issuesList.html('');
+        }
+        $appButton.hide();
+        $issuesList = null;
+        _repositoryUrl = false;
     }
 
 
     function _removeAppListeners() {
-        /*
-        $(ProjectManager).off('beforeAppClose', _removeAppListeners);
-        $(ProjectManager).off('projectClose', _onProjectClose);
         $(ProjectManager).off('projectOpen', _onProjectOpen);
-        */
+        $(ProjectManager).off('projectClose', _onProjectClose);
+        $(ProjectManager).off('beforeAppClose', _removeAppListeners);
     }
 
     function _addAppListeners() {
@@ -235,13 +265,12 @@ Globals
      *
      */
     AppInit.htmlReady(function () {
-        console.log('[' + EXTENSION_ID + '] :: htmlReady');
+        // console.log('[' + EXTENSION_ID + '] :: htmlReady');
         //
-        var minHeight = 360;
+        var minHeight = 410;
         _.extend(Strings, {ID_PREFIX: EXTENSION_ID});
         PanelManager.createBottomPanel(EXTENSION_ID + '.panel', $(Mustache.render(PanelHTML, Strings)), minHeight);
         $appPanel = $('#' + EXTENSION_ID + '-panel');
-        $('#' + EXTENSION_ID + '-panel .toolbar').on('click', _handlerPanelVisibility);
         //
         $('#main-toolbar .buttons').append(Mustache.render(ButtonHTML, Strings));
         $appButton = $('#' + EXTENSION_ID + '-button').on('click', _handlerPanelVisibility).hide();
@@ -253,7 +282,9 @@ Globals
 
 */
     function __registerCommands() {
-        CommandManager.register(Strings.SHOW_PANEL, SHOWPANEL_COMMAND_ID, _handlerPanelVisibility);
+        _command = CommandManager.register(Strings.SHOW_PANEL, SHOWPANEL_COMMAND_ID, _handlerPanelVisibility);
+        _command.setEnabled(false);
+        _command.setChecked(false);
     }
 
     function __registerWindowsMenu() {
@@ -262,8 +293,10 @@ Globals
     }
 
     AppInit.appReady(function () {
-        console.log('[' + EXTENSION_ID + '] :: appReady');
-        // _initialized = false;
+        // console.log('[' + EXTENSION_ID + '] :: appReady');
+        __registerCommands();
+        __registerWindowsMenu();
+        //
         _addAppListeners();
         _onProjectOpen();
     });
