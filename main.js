@@ -95,10 +95,16 @@ Globals
         }
     }
 
+    var MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
     function _refreshPanel(data) {
-        var i,
+        var i, j,
             $row,
             string,
+            /*
+            labels = [],
+            */
+            prefix = '',
             issues = data;
         // @TODO remove row events click on _clearPanel
         $issuesList = $('#' + EXTENSION_ID + '-panel .table-container .box .list');
@@ -106,13 +112,41 @@ Globals
             $appButton.show();
             _command.setEnabled(true);
             for (i = 0; i < issues.length; i++) {
-                console.log(issues[i]);
-                string = _.extend(issues[i], {even: (i % 2) ? 'odd' : ''});
+
+                string = {};
+                string.id = issues[i].id;
+                string.body = issues[i].body;
+                string.state = issues[i].state;
+                string.title = issues[i].title;
+                string.number = issues[i].number;
+                string.labels = issues[i].labels;
+                string.comments = issues[i].comments;
+                string.html_url = issues[i].html_url;
+                string.milestone = issues[i].milestone;
+                var d = new Date(issues[i].created_at);
+                string.created_at = d.getDate() + ' ' + MONTHS[d.getMonth()] + ' ' + d.getFullYear();
+                string.comments_url = issues[i].comments_url;
+                string.classes = '';
+                /*
+                for( j = 0; i < issues[i].labels.length; j++ ) {
+                    // if (!(labels.indexOf(string.labels[j].name) !== -1)) {
+                        // labels.push(string.labels[j].name);
+                    // }
+                    var str = (issues[i].labels[j].name).charAt(0).toUpperCase() + (issues[i].labels[j].name).substr(1);
+                    string.classes += str;
+                    prefix = ' ';
+                }
+                */
+                string.classes += prefix + string.state;
+                string = _.extend(string, {even: (i % 2) ? 'odd' : ''});
                 $row = $(Mustache.render(RowHTML, string));
+                $row.find('.issue-more a').first().on('click', $row.toggleClass('show'));
                 $issuesList.append($row);
             }
-            var width = issues.length * ((240) + 20);
+            var width = (($issuesList.find('.issue').first().width() + 20) * issues.length);
             $issuesList.css('width', (width + 20) + 'px');
+        } else{
+            // @TODO Si aucune entree pour le repository
         }
     }
 
@@ -267,10 +301,11 @@ Globals
     AppInit.htmlReady(function () {
         // console.log('[' + EXTENSION_ID + '] :: htmlReady');
         //
-        var minHeight = 410;
+        var minHeight = 290;
         _.extend(Strings, {ID_PREFIX: EXTENSION_ID});
         PanelManager.createBottomPanel(EXTENSION_ID + '.panel', $(Mustache.render(PanelHTML, Strings)), minHeight);
         $appPanel = $('#' + EXTENSION_ID + '-panel');
+        $('#' + EXTENSION_ID + '-panel .toolbar .actions .close').on('click', _handlerPanelVisibility);
         //
         $('#main-toolbar .buttons').append(Mustache.render(ButtonHTML, Strings));
         $appButton = $('#' + EXTENSION_ID + '-button').on('click', _handlerPanelVisibility).hide();

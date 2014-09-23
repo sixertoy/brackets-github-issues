@@ -1,38 +1,65 @@
-<li class="item {{even}}">
-    <div class="head clearfix">
-        <div class="number">
-            <a href="{{html_url}}" title="">#{{number}}</a>
-        </div>
-        <div class="status">
-            {{!--<span>state</span>--}}
-            <a class="comments" href="{{comments_url}}" title="">
-                <span><i class="icon"></i>{{comments}}</span>
+<li class="issue {{even}} {{classes}}">
+
+    <div class="block head clearfix">
+        <div class="issue-labels">
+            {{#labels}}
+            <a href="{{url}}" title="{{name}}">
+                <!-- styles/images/icon_47678.svg -->
+                <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+     width="8px" height="17.321px" viewBox="-2.563 0.299 8 17.321" enable-background="new -2.563 0.299 8 17.321"
+     xml:space="preserve"><path fill="#{{color}}" d="M5.438,2.284L5.231,0.866c0-0.309-0.244-0.567-0.539-0.567h-6.146c-0.29,0-0.533,0.259-0.533,0.567l0.206,1.418H5.438z"/><path fill="#{{color}}" d="M4.655,17.288c0,0.311-0.202,0.424-0.442,0.252l-2.726-1.921c-0.243-0.172-0.644-0.172-0.883,0l-2.725,1.921
+    c-0.242,0.172-0.441,0.059-0.441-0.252V0.866c0-0.309,0.242-0.567,0.533-0.567h6.148c0.295,0,0.538,0.259,0.538,0.567v16.422H4.655z
+    "/></svg>
             </a>
-            {{!--<button class="btn-alt-quiet"></button>--}}
+            {{/labels}}
         </div>
     </div>
-    <div class="labels">
-        {{#labels}}
-            <a href="{{url}}" style="background-color:#{{color}}">
-                <span>{{name}}</span>
+
+    <div class="block details clearfix">
+        <div class="issue-number">
+            <a href="{{html_url}}" title="">
+                <small>#</small>{{number}}
             </a>
-        {{/labels}}
+        </div>
+        {{#milestone}}
+        <div class="issue-milestone">
+            <a href="{{url}}" title="">
+                <small>milestone</small>&nbsp;{{title}}
+            </a>
+        </div>
+        {{/milestone}}
+        <a class="issue-comments" href="{{comments_url}}" title="">
+            <span>{{comments}}</span>
+            <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="12px" height="12px" viewBox="0 0 12 12" enable-background="new 0 0 12 12" xml:space="preserve"><g><g><polygon class="icon-comment" points="0.164,0 0.164,12 3.528,8.924 11.836,8.924 11.836,0 " /></g></g></svg>
+        </a>
     </div>
-    <div class="title">
-        <div>
-            <a href="{{html_url}}" title="">{{title}}</a>
+
+    <div class="block contents clearfix">
+        <div class="mask">
+            <div class="issue-title">
+                <div class="inner">
+                    <p>{{title}}</p>
+                </div>
+            </div>
+            {{#body}}
+            <div class="issue-more">
+                <a href="" title="">+</a>
+            </div>
+            <div class="issue-description">
+                <div class="inner">
+                    <p>{{body}}</p>
+                </div>
+            </div>
+            {{/body}}
         </div>
     </div>
-    <div class="description">
-        <div>
-            <p>{{body}}</p>
+
+    <div class="block footer clearfix">
+        <div class="issue-created_at">
+            <small>{{created_at}}</small>
         </div>
     </div>
-    <div class="footer clearfix">
-        <div>{{created_at}}</div>
-        <div class="milestone">
-            <a href="{{milestone.url}}" title="">{{milestone.title}}</a>
-        </div>
-    </div>
+
     <input type="hidden" name="" value="{{id}}">
+
 </li>

@@ -33,152 +33,146 @@
                     left:0;
                     width:100%;
                     position: relative;
-                    .item{
-                        position: relative;
+
+                    .issue{
                         float:left;
                         width:240px;
-                        height:320px;
-                        padding:0 0 10px 0;
+                        height:210px;
                         margin-left:20px;
-                        border-radius:4px;
+                        position: relative;
                         background:rgba(0, 0, 0, 0.15);
 
-                        > *{
+                        .block{
+                            margin-bottom:5px;
                             box-sizing: border-box;
-                            padding:0 20px;
-                            margin-bottom:10px;
-                        }
-
-                        .head{
-                            margin-bottom: 5px;
-                            width: 100%;
-                            padding:10px 20px;
-                            border-radius:4px 4px 0 0;
-                            background: rgba(0, 0, 0, 0.25);
-                            > *{
-                                width:auto;
-                                display:block;
+                            a:hover{
+                                text-decoration: none;
                             }
-                            .number{
-                                float:left;
-                                font-size: 1.3em;
-                                font-weight: bold;
-                                a{
-                                    color:#FFF;
-                                    &:hover{
-                                        text-decoration: none;
-                                    }
-                                }
-                            }
-                            .status{
-                                float:right;
-                                display: inline-block;
-                                .btn-alt-quiet{
-                                    width:13px;
-                                    height:13px;
-                                    padding: 4px 6px;
-                                    background: url(images/topcoat-settings-13.svg) no-repeat center center transparent;
-                                }
-                                .comments{
-                                    padding-right:15px;
-                                    display: inline-block;
-                                    background:url(images/icon_20079.png) no-repeat right center transparent;
-                                    &:hover{
-                                        text-decoration: none;
-                                    }
-                                }
+                            small{
+                                color:#FFF;
+                                font-size:0.8em;
+                                margin-right: 0.2em;
+                                font-weight: normal;
                             }
                         }
 
-                        .title{
-                            font-size: 1.2em;
-                            line-height: 1.1em;
-                            margin-bottom: 10px;
-                            /*
-                            height: 55px;
-                            min-height: 55px;
-                            */
-                            max-height: 55px;
-                            overflow: hidden;
-                            a{
-                                &:hover{
-                                    text-decoration: none;
-                                }
-                            }
-                        }
-
-                        .labels{
-                            margin-bottom: 5px;
-                            a{
-                                margin-right: 2px;
-                                width:6px;
-                                color: #FFF;
-                                padding:0 4px 1px 4px;
-                                cursor:pointer;
-                                overflow: hidden;
-                                line-height: 1.1em;
-                                border-radius: 8px;
-                                display: inline-block;
-                                transition: all 0.2s linear 0s;
-                                span{
-                                    visibility: hidden;
-                                    transition: all 0.2s linear 0s;
-                                }
-                                &:hover{
-                                    width:auto;
-                                    padding:0 8px 1px 8px;
-                                    text-decoration: none;
-                                    span{
-                                        visibility: visible;
-                                    }
-                                }
-                            }
-                        }
-
-                        .description{
-                            padding:10px 0;
-                            text-align: justify;
-                            background:rgba(0, 0, 0, 0.1);
-
-                            > div{
-
-                                height:130px;
-                                min-height:130px;
-                                max-height:130px;
-                                overflow-y: auto;
-                                overflow-x: hidden;
-
-                                padding:0 20px;
-
-                            }
-
-                        }
-
+                        .head,
                         .footer{
-                            left:0;
-                            top:300px;
                             width: 100%;
-                            margin-bottom:0;
-                            position: absolute;
+                            padding:0 10px;
+                            position: relative;
                             > div{
                                 float:left;
                                 width: auto;
                                 display: block;
-                                &.milestone{
+                                & + div{
                                     float:right;
-                                    a:hover{
-                                        text-decoration: none;
-                                    }
                                 }
                             }
                         }
 
+                        .head{
+                            position: relative;
+                        }
+
+                        .footer{
+                            left: 0;
+                            bottom: 0;
+                            padding: 5px 10px;
+                            position: absolute;
+                            background:rgba(0, 0, 0, 0.15);
+                        }
+
+                        .details{
+                            padding:10px;
+                            margin-bottom:5px;
+                            background:rgba(0, 0, 0, 0.15);
+                        }
+
+                        .contents{
+                            height:110px;
+                            overflow: hidden;
+                            position: relative;
+                            padding:0 0 5px 0;
+                            .mask{
+                                top:0;
+                                left:10px;
+                                height:110px;
+                                position: absolute;
+                                transition:all 0.2s linear 0s;
+                            }
+                            .issue-more{
+                                text-align: right;
+                                padding-right:10px;
+                            }
+                        }
+
+                        .issue{
+
+                            &-title,
+                            &-description{
+                                height:95px;
+                                overflow-y:auto;
+                                overflow-x:hidden;
+                                .inner{
+                                    padding-right:10px;
+                                }
+                            }
+
+                            &-title{
+                                font-size: 1.5em;
+                                font-weight: bold;
+                                line-height: 1.1em;
+                            }
+
+                            &-description{
+                            }
+
+                            &-number{
+                                font-size: 2em;
+                                font-weight: bold;
+                                line-height: 0.5em;
+                            }
+
+                            &-labels{
+                                top:-2px;
+                                right:10px;
+                                position:absolute;
+                            }
+
+                            &-milestone{
+                                padding:0;
+                                padding-top:2px;
+                                line-height: 1em;
+                            }
+
+                            &-created_at{
+                                float:left;
+                            }
+
+                            &-comments{
+                                top:30px;
+                                right:10px;
+                                color:#FFF;
+                                line-height: 1em;
+                                position: absolute;
+                                vertical-align: middle;
+                                .icon-comment{
+                                    fill:rgba(255, 255, 255, 0.25);
+                                }
+                            }
+                        }
+
+                        &.show{
+
+                        }
                     }
                 }
             }
         }
     }
 }
+
 #brackets-githubissue-button {
     position: relative;
     background: url(@icon) no-repeat center top transparent;
@@ -186,226 +180,3 @@
         background-position: center bottom;
     }
 }
-/*
-position:absolute;
-right:4px;
-top:7px;
-padding:4px 6px;
-content:"";
-background:
-width:13px;
-height:13px;
-background-position:center;
- */
-/*
-@dark:#3C3F41;
-@light-dark:#444749;
-@selected:rgba(45, 46, 48, 1);
-@selected-border-top:rgba(0,0,0,0.12);
-@selected-border-bottom:rgba(255,255,255,0.12);
-@light: #fff;
-@red:#f74687;
-@blue: #8fddff;
-@shadow: rgba(0, 0, 0, 0.498039) 0px 1px 2px;
-@orange:#FF6500;
-@green:#ACE539;
-@grey:#999580;
-
-
-#brackets-githubissue-panel{
-    &.bottom-panel{
-        border:0;
-        color:@light;
-        text-shadow: @shadow;
-        button{ cursor: pointer; }
-        .toolbar{
-            padding-top:4px;
-            background:@dark;
-            padding-bottom:2px;
-            text-align: center;
-            .title {
-                color:@grey;
-            }
-            .close{
-                color:@blue;
-                padding:0 10px;
-                text-align: center;
-            }
-            .filters{
-                margin: 0 auto;
-                > *{
-                    color:@light;
-                    border:0;
-                    height: 100%;
-                    border-radius:0;
-                    margin-right: 0;
-                    margin-left: 1px;
-                    padding: 5px 17px;
-                    background: fadeout(@selected, 75%);
-                    border-top: 1px solid @selected-border-top;
-                    border-bottom: 1px solid @selected-border-bottom;
-                    &:hover{
-                        color:@blue;
-                        background-color: @selected;
-                    }
-                    &.active{
-                        color:@blue;
-                        background:@selected;
-                    }
-                    &.clear{
-                        color:@light;
-                        background:fadeout(@selected, 35%);
-                        &:hover{
-                            color:@red;
-                            background:@selected;
-                        }
-                    }
-                }
-            }
-        }
-        .table-container{
-            overflow-y: auto;
-            position: relative;
-            overflow-x: hidden;
-            background:@light-dark;
-            .box{
-                top:0;
-                left: 0;
-                right: 0;
-                bottom: 0;
-                display: block;
-                position: absolute;
-            }
-        }
-    }
-}
-#brackets-githubissue-button {
-    position: relative;
-    background: url(@icon) no-repeat center top transparent;
-    &.active{
-        background-position: center bottom;
-    }
-    .counts{
-
-        top:12px;
-        left:12px;
-        position: absolute;
-
-        border:0;
-        width:13px;
-        height:13px;
-        color:@light;
-        display: block;
-        background:@red;
-        font-size: 0.75em;
-        line-height: 1.2em;
-        text-align: center;
-        border-radius:10px;
-        text-indent:-0.15em;
-
-        display: none;
-
-    }
-}
-*/
-/** --------------------------------
- *
- * Specific
- *
- */
-/*
-    ul{
-        margin: 0;
-        padding: 0;
-        list-style-type: none;
-    }
-    .box{
-        clear:both;
-        .line{
-            clear:both;
-            width: 100%;
-            overflow: hidden;
-            &.odd{
-                background:rgba(0, 0, 0, 0.05);
-            }
-        }
-    }
-}
-/*
-#brackets-githubissue-panel{
-    .box{
-        clear:both;
-        .line{
-            clear:both;
-            width: 100%;
-            overflow: hidden;
-            > span{
-                color:@light;
-                display: block;
-                padding:7px 7px;
-                font-size: 0.9em;
-                margin-bottom:1px;
-                line-height: 1.1em;
-                position: relative;
-                border-left: 3px solid fadeout(@selected, 75%);
-                > *{
-                    color:@light;
-                    display: block;
-                }
-                a{
-                    top:5px;
-                    right:5px;
-                    display: block;
-                    padding:2px 5px;
-                    position: absolute;
-
-                    border:0;
-                    color:@light;
-                    border-radius:10px;
-                    text-decoration: none;
-                    background: fadeout(@selected, 75%);
-                    &:hover,
-                    &:active{
-                        text-decoration: none;
-                    }
-                }
-                quote{
-                    color:@light;
-                    display: block;
-                    margin-top: 10px;
-                    border-radius:4px;
-                    position: relative;
-                    padding:10px 10px 10px 10px;
-                    background:lighten(@light-dark, 5%);
-                    & b{ color:@light !important; }
-                    & > *{
-                        color:@light;
-                        display: block;
-                        margin-top:3px;
-                        position:relative;
-                    }
-                    .stacks{
-                        padding-left:10px;
-                        > *{
-                            display: block;
-                        }
-                    }
-                }
-            }
-            &.odd{
-                background:rgba(0, 0, 0, 0.05);
-            }
-            &.error > span{
-                > span{
-                    color:@red;
-                }
-                a{
-                    color:@light;
-                    background: @red;
-                }
-                border-left: 3px solid @red;
-            }
-        }
-    }
-}
-*/
