@@ -115,7 +115,8 @@ Globals
 
                 string = {};
                 string.id = issues[i].id;
-                string.body = issues[i].body;
+                string.body = false;
+                // string.body = issues[i].body;
                 string.state = issues[i].state;
                 string.title = issues[i].title;
                 string.number = issues[i].number;
@@ -140,7 +141,7 @@ Globals
                 string.classes += prefix + string.state;
                 string = _.extend(string, {even: (i % 2) ? 'odd' : ''});
                 $row = $(Mustache.render(RowHTML, string));
-                $row.find('.issue-more a').first().on('click', $row.toggleClass('show'));
+                // $row.find('.issue-more a').first().on('click', $row.toggleClass('show'));
                 $issuesList.append($row);
             }
             var width = (($issuesList.find('.issue').first().width() + 20) * issues.length);
@@ -159,7 +160,7 @@ Globals
     function _getRepositoryIssues() {
         // console.log('[' + EXTENSION_ID + '] :: _getRepositoryIssues');
         if (_repositoryUrl) {
-            var _user = 'malas34';
+            var _user = '';
             _controller.exec('issue', _repositoryUrl)
                 .done(function (issues) {
                     // console.log('[' + EXTENSION_ID + '] :: _getRepositoryIssues ' + Strings.SUCCESS);
@@ -276,8 +277,8 @@ Globals
     function _authenticate() {
         console.log('[' + EXTENSION_ID + '] :: _authenticate');
         var _login = {
-            username: 'malas34',
-            password: '**********'
+            username: '',
+            password: ''
         };
         _controller.exec('authenticate', _login)
             .done(function (bool) {
