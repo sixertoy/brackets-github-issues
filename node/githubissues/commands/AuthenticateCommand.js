@@ -27,9 +27,10 @@
 (function () {
     'use strict';
 
-    var Q = require('q'),
-        Fs = require('fs'),
-        _ = require('lodash'),
+    var Fs = require('fs');
+
+    var Q = require('../../../thirdparty/q'),
+        _ = require('../../../thirdparty/lodash'),
         AbstractCommand = require('../../../lib/abstracts/AbstractCommand');
 
     var PREFIX = '[githubissue]';

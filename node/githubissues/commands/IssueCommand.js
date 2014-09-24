@@ -29,10 +29,11 @@
 
     // http://mikedeboer.github.io/node-github/
 
-    var Q = require('q'),
-        Fs = require('fs'),
-        _ = require('lodash'),
+    var Fs = require('fs'),
         Path = require('path'),
+
+    var Q = require('../../../thirdparty/q'),
+        _ = require('../../../thirdparty/lodash'),
         AbstractCommand = require('../../../lib/abstracts/AbstractCommand');
 
     var PREFIX = '[githubissue]';

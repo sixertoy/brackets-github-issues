@@ -87,6 +87,9 @@
                 })
                 .forEach(function (file) {
                     name = (file.split('.')[0].toLocaleLowerCase());
+
+                    console.log(name);
+
                     Command = require('./commands/' + name);
                     var instance = new Command();
                     instance.register(_domain, _domainManager, $this);
