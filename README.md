@@ -1,20 +1,20 @@
-Brackets Github Issue
+Brackets Github Issues
 ====
 
-> Github Issue is an extension build for [Adobe Brackets](http://brackets.io)
-> It brings to you the abilities to view your github project's issue
+> Brackets Github Issues is an extension build for [Adobe Brackets](http://brackets.io)
+> It brings to you the abilities to view your github project's issues
 > Inside the best Open Source webdevelopement IDE
 
 package.json Requirements
 ====
 
-> Project's root must contains a package.json file width a readable repository's property
+> Project's root must contains a package.json file with a readable git repository's property
 
 ``` JSON
 {
     "repository" :
         { "type" : "git"
-        , "url" : "http://github.com/npm/npm.git"
+        , "url" : "https://github.com/malas34/brackets-github-issues.git"
     }
 }
 ```
@@ -24,7 +24,7 @@ License
 ===
 The MIT License (MIT)
 
-Copyright (c) 2014 Matthieu Lassalvy malas34[dot]github[at]gmail[dot]com
+Copyright (c) 2014 Matthieu Lassalvy malas34[.]github[at]gmail[.]com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

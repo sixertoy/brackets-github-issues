@@ -1,9 +1,9 @@
 {
-    "name": "brackets-github-issue",
+    "name": "brackets-github-issues",
     "version": "0.1.1",
-    "title": "Brackets Github Issue",
-    "description": "View/Create/Manage Github Issue",
-    "homepage": "https://github.com/malas34/brackets-clocktrack",
+    "title": "Brackets Github Issues",
+    "description": "View Github Issues",
+    "homepage": "https://github.com/malas34/brackets-github-issues",
     "author": {
         "name": "Matthieu Lassalvy",
         "email": "malas34.github@gmail.com",
@@ -11,7 +11,7 @@
     },
     "repository": {
         "type": "git",
-        "url": "https://github.com/malas34/brackets-github-issue.git"
+        "url": "https://github.com/malas34/brackets-github-issues.git"
     },
     "license": {
         "type": "MIT",
@@ -29,5 +29,13 @@
         "lodash": ">=2.4.1",
         "github": ">=0.2.2"
     },
-    "keywords": ["github", "issue", "manage", "create"]
+    "keywords": ["github", "issue", "view"],
+    "files": [
+        "main.js",
+        "string.js",
+        "README.md",
+        "htmlContent/row.html",
+        "htmlContent/panel.html",
+        "htmlContent/button.html",
+    ]
 }
