@@ -17,7 +17,7 @@ $RECYCLE.BIN/
 # =========================
 # Operating System Files
 # =========================
-nodes_modules/
+node_modules/
 
 # OSX
 # =========================
