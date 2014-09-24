@@ -24,6 +24,13 @@
         "node": ">=0.10.26",
         "brackets": ">=0.42.0"
     },
+    "devDependencies": {
+        "grunt": "~0.4.4",
+        "grunt-cli": "~0.1.13 ",
+        "grunt-contrib-qunit": "~0.5.2",
+        "grunt-contrib-jshint": "~0.6.0",
+        "grunt-contrib-compress": "~0.10.0"
+    },
     "dependencies": {
         "q": "1.0.1",
         "lodash": ">=2.4.1",
@@ -52,5 +59,27 @@
         "node/githubissues/commands/AuthenticateCommand.js",
         "lib/abstracts/AbstractCommand.js",
         "lib/abstracts/Class.js",
+        "thirdparty/q/index.js",
+        "thirdparty/lodash/index.js",
+        "thirdparty/github/index.js",
+        "thirdparty/github/error.js",
+        "thirdparty/github/util.js",
+        "thirdparty/github/api/v3.0.0/authorization.js",
+        "thirdparty/github/api/v3.0.0/events.js",
+        "thirdparty/github/api/v3.0.0/gists.js",
+        "thirdparty/github/api/v3.0.0/gitdata.js",
+        "thirdparty/github/api/v3.0.0/gitignore.js",
+        "thirdparty/github/api/v3.0.0/index.js",
+        "thirdparty/github/api/v3.0.0/issues.js",
+        "thirdparty/github/api/v3.0.0/markdown.js",
+        "thirdparty/github/api/v3.0.0/misc.js",
+        "thirdparty/github/api/v3.0.0/orgs.js",
+        "thirdparty/github/api/v3.0.0/pullRequests.js",
+        "thirdparty/github/api/v3.0.0/releases.js",
+        "thirdparty/github/api/v3.0.0/repos.js",
+        "thirdparty/github/api/v3.0.0/routes.json",
+        "thirdparty/github/api/v3.0.0/search.js",
+        "thirdparty/github/api/v3.0.0/statuses.js",
+        "thirdparty/github/api/v3.0.0/user.js"
     ]
 }

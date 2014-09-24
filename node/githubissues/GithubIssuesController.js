@@ -28,11 +28,12 @@
 
     'use strict';
 
-    var Q = require('q'), // https://coderwall.com/p/ijy61g
-        Fs = require('fs'),
-        _ = require('lodash'),
-        Path = require('path'),
-        GitHubApi = require('github');
+    var Fs = require('fs'),
+        Path = require('path');
+
+    var Q = require('../../thirdparty/q'), // https://coderwall.com/p/ijy61g
+        _ = require('../../thirdparty/lodash'),
+        GitHubApi = require('../../thirdparty/github');
 
     var PREFIX = '[githubissues]';
 
