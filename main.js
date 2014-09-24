@@ -49,9 +49,9 @@ define(function (require, exports, module) {
 Globals
 
 */
-    var NODE_PATH = 'node/githubissue/',
+    var NODE_PATH = 'node/githubissues/',
         PREFIX = 'malas34',
-        EXTENSION_ID = 'brackets-githubissue',
+        EXTENSION_ID = 'brackets-githubissues',
         SHOWPANEL_COMMAND_ID = PREFIX + '.' + EXTENSION_ID + '.showpanel';
     /* --------------------------
 
@@ -74,9 +74,9 @@ Globals
  Variables
 
 */
-    var _modulePath = ExtensionUtils.getModulePath(module, NODE_PATH + 'GithubIssueController'),
+    var _modulePath = ExtensionUtils.getModulePath(module, NODE_PATH + 'GithubIssuesController'),
         _extensionPrefs = PreferencesManager.getExtensionPrefs(PREFIX + '.' + EXTENSION_ID),
-        _controller = new NodeDomain('githubissue', _modulePath),
+        _controller = new NodeDomain('githubissues', _modulePath),
         _repositoryUrl = false,
         _module = module;
 

@@ -41,7 +41,7 @@
         options = {
             async: true,
             name: 'issue',
-            description: 'Returns issue from Github API'
+            description: 'Returns issues from Github API'
         };
 
     var IssueCommand = AbstractCommand.extend({

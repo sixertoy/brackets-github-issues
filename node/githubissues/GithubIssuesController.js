@@ -34,15 +34,15 @@
         Path = require('path'),
         GitHubApi = require('github');
 
-    var PREFIX = '[githubissue]';
+    var PREFIX = '[githubissues]';
 
     var _service,
         _domainManager,
         _commandsMap = {},
         _defaultsOptions = {},
-        _domain = "githubissue";
+        _domain = "githubissues";
 
-    var GithubIssueController = function () {
+    var GithubIssuesController = function () {
         _service = new GitHubApi({
             debug: true,
             version: "3.0.0",
@@ -52,7 +52,7 @@
         _.extend(this.options, _defaultsOptions);
     };
 
-    _.extend(GithubIssueController.prototype, {
+    _.extend(GithubIssuesController.prototype, {
 
         _isCommandFile: function (file) {
             if (file.indexOf('Command') !== -1) {
@@ -76,7 +76,7 @@
          *
          */
         _registerCommands: function () {
-            console.log(PREFIX + ' :: [GithubIssueController] _registerCommands');
+            console.log(PREFIX + ' :: [GithubIssuesController] _registerCommands');
             var $this = this,
                 name,
                 Command;
@@ -95,7 +95,7 @@
 
         // @TODO create delegate func
         init: function (domainManager) {
-            console.log(PREFIX + ' :: [GithubIssueController] init');
+            console.log(PREFIX + ' :: [GithubIssuesController] init');
             _domainManager = domainManager;
             if (!_domainManager.hasDomain(_domain)) {
                 _domainManager.registerDomain(_domain, {major: 0, minor: 1});
@@ -105,6 +105,6 @@
 
     });
 
-    module.exports = new GithubIssueController();
+    module.exports = new GithubIssuesController();
 
 }());
