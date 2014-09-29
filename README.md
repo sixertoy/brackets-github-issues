@@ -5,6 +5,8 @@ Brackets Github Issues
 > It brings to you the abilities to view your github project's issues
 > Inside the best Open Source webdevelopement IDE
 
+![Screenshot](https://github.com/malas34/brackets-github-issues/blob/master/screenshot.png)
+
 package.json Requirements
 ====
 
