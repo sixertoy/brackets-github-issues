@@ -38,6 +38,8 @@
     },
     "keywords": ["github", "issue", "view"],
     "files": [
+        "screenshot.png",
+        "package.json",
         "main.js",
         "README.md",
         "strings.js",

@@ -50,7 +50,7 @@
         },
 
         _authenticate: function () {
-            console.log(PREFIX + ' :: ' + this.options().name + ' _authenticate');
+            // console.log(PREFIX + ' :: ' + this.options().name + ' _authenticate');
             var $this = this,
                 deferred = Q.defer();
             try {
@@ -63,7 +63,7 @@
         },
 
         _execute: function (login, errback) {
-            console.log(PREFIX + ' :: ' + this.options().name + ' execute command');
+            // console.log(PREFIX + ' :: ' + this.options().name + ' execute command');
             _.extend(_login, login);
             this._authenticate()
                 .then(function (bool) {

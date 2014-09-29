@@ -30,7 +30,7 @@
     // http://mikedeboer.github.io/node-github/
 
     var Fs = require('fs'),
-        Path = require('path'),
+        Path = require('path');
 
     var Q = require('../../../thirdparty/q'),
         _ = require('../../../thirdparty/lodash'),
@@ -53,7 +53,7 @@
         },
 
         _getRepoIssues: function (repoUrl) {
-            console.log(PREFIX + ' :: ' + this.options().name + ' _issue');
+            // console.log(PREFIX + ' :: ' + this.options().name + ' _issue');
             var $this = this,
                 deferred = Q.defer(),
                 rule = new RegExp('^(https|http|git)(://github.com/)(.*)/', 'i');
@@ -72,7 +72,7 @@
         },
 
         _execute: function (repoUrl, errback) {
-            console.log(PREFIX + ' :: ' + this.options().name + ' execute command');
+            // console.log(PREFIX + ' :: ' + this.options().name + ' execute command');
             this._getRepoIssues(repoUrl)
                 .then(function (values) {
                     errback(null, values);

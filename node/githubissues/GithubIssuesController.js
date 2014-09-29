@@ -31,8 +31,8 @@
     var Fs = require('fs'),
         Path = require('path');
 
-    var Q = require('../../thirdparty/q'), // https://coderwall.com/p/ijy61g
-        _ = require('../../thirdparty/lodash'),
+    // Q = require('../../thirdparty/q'), // https://coderwall.com/p/ijy61g
+    var _ = require('../../thirdparty/lodash'),
         GitHubApi = require('../../thirdparty/github');
 
     var PREFIX = '[githubissues]';
@@ -45,7 +45,7 @@
 
     var GithubIssuesController = function () {
         _service = new GitHubApi({
-            debug: true,
+            debug: false,
             version: "3.0.0",
             protocol: "https"
         });
@@ -77,7 +77,7 @@
          *
          */
         _registerCommands: function () {
-            console.log(PREFIX + ' :: [GithubIssuesController] _registerCommands');
+            // console.log(PREFIX + ' :: [GithubIssuesController] _registerCommands');
             var $this = this,
                 name,
                 Command;
@@ -87,9 +87,6 @@
                 })
                 .forEach(function (file) {
                     name = (file.split('.')[0].toLocaleLowerCase());
-
-                    console.log(name);
-
                     Command = require('./commands/' + name);
                     var instance = new Command();
                     instance.register(_domain, _domainManager, $this);
@@ -99,7 +96,7 @@
 
         // @TODO create delegate func
         init: function (domainManager) {
-            console.log(PREFIX + ' :: [GithubIssuesController] init');
+            // console.log(PREFIX + ' :: [GithubIssuesController] init');
             _domainManager = domainManager;
             if (!_domainManager.hasDomain(_domain)) {
                 _domainManager.registerDomain(_domain, {major: 0, minor: 1});
