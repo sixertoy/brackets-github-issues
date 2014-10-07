@@ -34,7 +34,9 @@
     "dependencies": {
         "q": "1.0.1",
         "lodash": ">=2.4.1",
-        "github": ">=0.2.2"
+        "github": ">=0.2.2",
+        "node-gitlab": ">=0.4.1",
+        "promised-redmine": ">=0.2.6"
     },
     "keywords": ["github", "issue", "view"],
     "files": [
@@ -83,5 +85,6 @@
         "thirdparty/github/api/v3.0.0/search.js",
         "thirdparty/github/api/v3.0.0/statuses.js",
         "thirdparty/github/api/v3.0.0/user.js"
+
     ]
 }
