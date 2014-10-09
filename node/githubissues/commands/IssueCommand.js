@@ -56,7 +56,8 @@
             // console.log(PREFIX + ' :: ' + this.options().name + ' _issue');
             var $this = this,
                 deferred = Q.defer(),
-                rule = new RegExp('^(https|http|git)(://github.com/)(.*)/', 'i');
+                rule = new RegExp('^(https|http|git)(://github.com/|://git.smile.fr)(.*)/', 'i');
+
             var obj = {};
             obj.user = repoUrl.match(rule)[3];
             obj.repo = Path.basename(repoUrl, '.git');

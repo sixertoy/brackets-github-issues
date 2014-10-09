@@ -146,7 +146,7 @@ Globals
             }
             var width = (($issuesList.find('.issue').first().width() + 20) * issues.length);
             $issuesList.css('width', (width + 20) + 'px');
-        } else{
+        } else {
             // @TODO Si aucune entree pour le repository
         }
     }
