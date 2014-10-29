@@ -37,12 +37,12 @@ define(function (require, exports, module) {
         Resizer = brackets.getModule('utils/Resizer'),
         Commands = brackets.getModule('command/Commands'),
         NodeDomain = brackets.getModule('utils/NodeDomain'),
+        PanelManager = brackets.getModule('view/PanelManager'),
         EditorManager = brackets.getModule('editor/EditorManager'),
         ExtensionUtils = brackets.getModule('utils/ExtensionUtils'),
         ProjectManager = brackets.getModule('project/ProjectManager'),
         CommandManager = brackets.getModule('command/CommandManager'),
         ExtensionLoader = brackets.getModule('utils/ExtensionLoader'),
-        WorkspaceManager = brackets.getModule('view/WorkspaceManager'),
         PreferencesManager = brackets.getModule('preferences/PreferencesManager');
     /** ------------------------------------
 
@@ -304,7 +304,7 @@ Globals
         //
         var minHeight = 290;
         _.extend(Strings, {ID_PREFIX: EXTENSION_ID});
-        WorkspaceManager.createBottomPanel(EXTENSION_ID + '.panel', $(Mustache.render(PanelHTML, Strings)), minHeight);
+        PanelManager.createBottomPanel(EXTENSION_ID + '.panel', $(Mustache.render(PanelHTML, Strings)), minHeight);
         $appPanel = $('#' + EXTENSION_ID + '-panel');
         $('#' + EXTENSION_ID + '-panel .toolbar .actions .close').on('click', _handlerPanelVisibility);
         //
@@ -329,10 +329,7 @@ Globals
     }
 
     AppInit.appReady(function () {
-
-
-        console.log('[' + EXTENSION_ID + '] :: appReady');
-
+        // console.log('[' + EXTENSION_ID + '] :: appReady');
         __registerCommands();
         __registerWindowsMenu();
         //
