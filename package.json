@@ -1,90 +1,40 @@
 {
-    "name": "malas34.brackets-github-issues",
-    "version": "1.0.1",
-    "title": "Brackets Github Issues",
-    "description": "View current project's Github issues inside an Adobe Brackets panel",
-    "homepage": "https://github.com/malas34/brackets-github-issues",
-    "author": {
-        "name": "Matthieu Lassalvy",
-        "email": "malas34.github@gmail.com",
-        "url": "https://github.com/malas34"
-    },
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/malas34/brackets-github-issues.git"
-    },
-    "license": {
-        "type": "MIT",
-        "url": "http://www.opensource.org/licenses/mit-license.php"
-    },
-    "main": [
-        "main.js"
-    ],
-    "engines": {
-        "node": ">=0.10.26",
-        "brackets": ">=0.42.0"
-    },
-    "devDependencies": {
-        "grunt": "~0.4.4",
-        "grunt-cli": "~0.1.13 ",
-        "grunt-contrib-qunit": "~0.5.2",
-        "grunt-contrib-jshint": "~0.6.0",
-        "grunt-contrib-compress": "~0.10.0"
-    },
-    "dependencies": {
-        "q": "1.0.1",
-        "lodash": ">=2.4.1",
-        "github": ">=0.2.2",
-        "node-gitlab": ">=0.4.1",
-        "promised-redmine": ">=0.2.6"
-    },
-    "keywords": ["github", "issue", "view"],
-    "files": [
-        "screenshot.png",
-        "package.json",
-        "main.js",
-        "README.md",
-        "strings.js",
-        "htmlContent/row.html",
-        "htmlContent/panel.html",
-        "htmlContent/button.html",
-        "nls/strings.js",
-        "nls/fr/strings.js",
-        "nls/root/strings.js",
-        "styles/styles.css",
-        "styles/images/button.svg",
-        "styles/images/icon_20079.svg",
-        "styles/images/license-icon_20079.txt",
-        "styles/images/icon_47678.svg",
-        "styles/images/license-icon_47678.txt",
-        "styles/images/topcoat-settings-13.svg",
-        "node/githubissues/GithubIssuesController.js",
-        "node/githubissues/commands/IssueCommand.js",
-        "node/githubissues/commands/AuthenticateCommand.js",
-        "lib/abstracts/AbstractCommand.js",
-        "lib/abstracts/Class.js",
-        "thirdparty/q/index.js",
-        "thirdparty/lodash/index.js",
-        "thirdparty/github/index.js",
-        "thirdparty/github/error.js",
-        "thirdparty/github/util.js",
-        "thirdparty/github/api/v3.0.0/authorization.js",
-        "thirdparty/github/api/v3.0.0/events.js",
-        "thirdparty/github/api/v3.0.0/gists.js",
-        "thirdparty/github/api/v3.0.0/gitdata.js",
-        "thirdparty/github/api/v3.0.0/gitignore.js",
-        "thirdparty/github/api/v3.0.0/index.js",
-        "thirdparty/github/api/v3.0.0/issues.js",
-        "thirdparty/github/api/v3.0.0/markdown.js",
-        "thirdparty/github/api/v3.0.0/misc.js",
-        "thirdparty/github/api/v3.0.0/orgs.js",
-        "thirdparty/github/api/v3.0.0/pullRequests.js",
-        "thirdparty/github/api/v3.0.0/releases.js",
-        "thirdparty/github/api/v3.0.0/repos.js",
-        "thirdparty/github/api/v3.0.0/routes.json",
-        "thirdparty/github/api/v3.0.0/search.js",
-        "thirdparty/github/api/v3.0.0/statuses.js",
-        "thirdparty/github/api/v3.0.0/user.js"
-
-    ]
+  "name": "sixertoy.brackets-github-issues",
+  "version": "1.0.1",
+  "title": "Brackets Github Issues",
+  "description": "View current project's Github issues inside an Adobe Brackets panel",
+  "homepage": "https://github.com/sixertoy/brackets-github-issues",
+  "author": {
+    "name": "Matthieu Lassalvy",
+    "email": "sixertoy.github@gmail.com",
+    "url": "https://github.com/sixertoy"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sixertoy/brackets-github-issues.git"
+  },
+  "license": {
+    "type": "MIT",
+    "url": "http://www.opensource.org/licenses/mit-license.php"
+  },
+  "main": [
+    "app/main.js"
+  ],
+  "engines": {
+    "node": ">=0.10.26",
+    "brackets": ">=0.42.0"
+  },
+  "devDependencies": {
+    "grunt-contrib-compress": "^0.12.0",
+    "grunt-contrib-jshint": "^0.11.0",
+    "grunt-bump": "0.0.16",
+    "load-grunt-tasks": "^3.0.0",
+    "grunt-contrib-less": "^1.0.0"
+  },
+  "dependencies": {},
+  "keywords": [
+    "github",
+    "issues",
+    "tickets"
+  ]
 }

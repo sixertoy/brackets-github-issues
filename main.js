@@ -44,15 +44,18 @@ define(function (require, exports, module) {
         ExtensionLoader = brackets.getModule('utils/ExtensionLoader'),
         WorkspaceManager = brackets.getModule('view/WorkspaceManager'),
         PreferencesManager = brackets.getModule('preferences/PreferencesManager');
+
     /** ------------------------------------
 
 Globals
 
 */
-    var NODE_PATH = 'node/githubissues/',
+    var NODE_PATH = './app/node/githubissues/',
         PREFIX = 'malas34',
         EXTENSION_ID = 'brackets-githubissues',
         SHOWPANEL_COMMAND_ID = PREFIX + '.' + EXTENSION_ID + '.showpanel';
+
+
     /* --------------------------
 
  UI Ressources
@@ -61,24 +64,27 @@ Globals
     var _command = null,
         $appPanel = null,
         $appButton = null,
-        $issuesList =  null;
+        $issuesList = null;
 
-    var Strings = require('strings');
+    var Strings = require('./strings');
 
-    var RowHTML = require('text!htmlContent/row.html'),
-        PanelHTML = require('text!htmlContent/panel.html'),
-        ButtonHTML = require('text!htmlContent/button.html');
-    ExtensionUtils.loadStyleSheet(module, 'styles/styles.css');
+    var RowHTML = require('text!app/htmlContent/row.html'),
+        PanelHTML = require('text!app/htmlContent/panel.html'),
+        ButtonHTML = require('text!app/htmlContent/button.html');
+    ExtensionUtils.loadStyleSheet(module, 'app/htmlContent/css/styles.css');
+
     /* --------------------------
 
  Variables
 
 */
+    /*
     var _modulePath = ExtensionUtils.getModulePath(module, NODE_PATH + 'GithubIssuesController'),
         _extensionPrefs = PreferencesManager.getExtensionPrefs(PREFIX + '.' + EXTENSION_ID),
         _controller = new NodeDomain('githubissues', _modulePath),
         _repositoryUrl = false,
         _module = module;
+        */
 
     /**
      *
@@ -97,13 +103,11 @@ Globals
 
     var MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
+    /*
     function _refreshPanel(data) {
         var i, j,
             $row,
             string,
-            /*
-            labels = [],
-            */
             prefix = '',
             issues = data;
         // @TODO remove row events click on _clearPanel
@@ -128,16 +132,6 @@ Globals
                 string.created_at = d.getDate() + ' ' + MONTHS[d.getMonth()] + ' ' + d.getFullYear();
                 string.comments_url = issues[i].comments_url;
                 string.classes = '';
-                /*
-                for( j = 0; i < issues[i].labels.length; j++ ) {
-                    // if (!(labels.indexOf(string.labels[j].name) !== -1)) {
-                        // labels.push(string.labels[j].name);
-                    // }
-                    var str = (issues[i].labels[j].name).charAt(0).toUpperCase() + (issues[i].labels[j].name).substr(1);
-                    string.classes += str;
-                    prefix = ' ';
-                }
-                */
                 string.classes += prefix + string.state;
                 string = _.extend(string, {even: (i % 2) ? 'odd' : ''});
                 $row = $(Mustache.render(RowHTML, string));
@@ -150,6 +144,7 @@ Globals
             // @TODO Si aucune entree pour le repository
         }
     }
+    */
 
     /**
      *
@@ -157,6 +152,7 @@ Globals
      * depuis le repository actuel
      *
      */
+    /*
     function _getRepositoryIssues() {
         // console.log('[' + EXTENSION_ID + '] :: _getRepositoryIssues');
         if (_repositoryUrl) {
@@ -172,6 +168,7 @@ Globals
                 });
         }
     }
+    */
 
     /**
      *
@@ -181,6 +178,7 @@ Globals
      * on verifie qu'il s'agit d'un repo git
      *
      */
+    /*
     function _getRepositoryURL(data) {
         var result = false;
         // Si le champs repository est une string
@@ -198,6 +196,7 @@ Globals
         }
         return result;
     }
+    */
 
     /**
      * A l'ouverture d'un projet
@@ -208,6 +207,8 @@ Globals
      * "repository":{ "type":"git", "url":"http[s]://github/repo/url"}
      */
     function _onProjectOpen() {
+        console.log('[' + EXTENSION_ID + '] :: _onProjectOpen');
+        /*
         var uri = ProjectManager.getInitialProjectPath();
         // Chargement du JSON du projet
         ExtensionUtils.loadPackageJson(uri)
@@ -229,6 +230,7 @@ Globals
             .fail(function () {
                 console.log('[' + EXTENSION_ID + '] :: Unable to load project\'s package.json');
             });
+        */
     }
 
     /**
@@ -242,7 +244,8 @@ Globals
      *
      */
     function _onProjectClose() {
-        // console.log('[' + EXTENSION_ID + '] :: _onProjectClose');
+        console.log('[' + EXTENSION_ID + '] :: _onProjectClose');
+        /*
         if ($appButton.hasClass('active')) {
             Resizer.toggle($appPanel);
             _command.setChecked(false);
@@ -255,6 +258,7 @@ Globals
         $appButton.hide();
         $issuesList = null;
         _repositoryUrl = false;
+        */
     }
 
 
@@ -299,6 +303,7 @@ Globals
      * Before App Ready
      *
      */
+    /*
     AppInit.htmlReady(function () {
         // console.log('[' + EXTENSION_ID + '] :: htmlReady');
         //
@@ -311,6 +316,7 @@ Globals
         $('#main-toolbar .buttons').append(Mustache.render(ButtonHTML, Strings));
         $appButton = $('#' + EXTENSION_ID + '-button').on('click', _handlerPanelVisibility).hide();
     });
+    */
 
     /** ------------------------------------
 
@@ -329,12 +335,12 @@ Globals
     }
 
     AppInit.appReady(function () {
-        // console.log('[' + EXTENSION_ID + '] :: appReady');
+        console.log('[' + EXTENSION_ID + '] :: appReady');
         __registerCommands();
         __registerWindowsMenu();
         //
         _addAppListeners();
-        _onProjectOpen();
+        // _onProjectOpen();
     });
 
 });

@@ -1,32 +1,29 @@
+/**
+ * Grunt Mustacher
+ * https://github.com/malas34/grunt-mustacher
+ *
+ * Copyright (c) 2014 Matthieu Lassalvy
+ * Licensed under the MIT license.
+ *
+ * HANDLEBARS
+ * @see http://handlebarsjs.com/
+ *
+ * http://img.shields.io/travis/sixertoy/grunt-mustacher?style=flat-square
+ *
+ */
+/*jslint plusplus: true, indent: 4 */
+/*global module, require */
 module.exports = function (grunt) {
-    grunt.initConfig({
-        pkg: grunt.file.readJSON('package.json'),
-        compress: {
-            main: {
-                options: {
-                    archive: 'releases/malas34.brackets-github-issues_<%= pkg.version %>.zip'
-                },
-                files: [
-                    {
-                        src: '<%= pkg.files %>',
-                        dest: 'malas34.brackets-github-issues/'
-                    }
-                ]
-            }
-        },
-        qunit: {
-            files: []
-        },
-        jshint: {
-            file: []
-        }
+    'use strict';
+    // load configs
+    require('load-grunt-config')(grunt, {
+        data: {}
     });
 
-    // grunt.loadNpmTasks('grunt-contrib-qunit');
-    grunt.loadNpmTasks('grunt-contrib-jshint');
-    grunt.loadNpmTasks('grunt-contrib-compress');
+    // Tasks
+    grunt.loadTasks('tasks');
 
-    grunt.registerTask('package', ['jshint', 'compress']);
-    grunt.registerTask('default', ['jshint']);
+    // By default, lint and run all tests.
+    grunt.registerTask('default', ['jshint', 'all']);
 
 };

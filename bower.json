@@ -1,0 +1,23 @@
+{
+  "name": "brackets-github-issues",
+  "version": "1.0.1",
+  "homepage": "https://github.com/sixertoy/brackets-github-issues",
+  "authors": [
+    "sixertoy <sixertoy.github@gmail.com>"
+  ],
+  "moduleType": [
+    "node"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "q": "~2.0.2",
+    "lodash": "~2.4.1"
+  }
+}

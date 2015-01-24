@@ -1,0 +1,4 @@
+default:
+  - jshint
+  - jasmine_node
+  - markdown

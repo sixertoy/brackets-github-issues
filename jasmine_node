@@ -1,0 +1,2 @@
+#!/usr/bin/env node
+require('./node_modules/grunt-jasmine-node/node_modules/jasmine-node/lib/jasmine-node/cli');
